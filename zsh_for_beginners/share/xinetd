@@ -1,0 +1,33 @@
+service zsh
+{
+        disable = no
+        type = UNLISTED
+        wait = no
+        server = /run.sh
+        socket_type = stream
+        protocol = tcp
+        user = zsh
+        port = 4869
+        flags = REUSE
+        per_source = 5
+        rlimit_cpu = 3
+        nice = 18
+        passenv =
+}
+
+service flag
+{
+        disable = no
+        type = UNLISTED
+        wait = no
+        server = /bin/cat
+        server_args = /flag
+        socket_type = stream
+        protocol = tcp
+        user = root
+        port = 1337
+        flags = REUSE
+        per_source = 5
+        rlimit_cpu = 3
+        nice = 18
+}

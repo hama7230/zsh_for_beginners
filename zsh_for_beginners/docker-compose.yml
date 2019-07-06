@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+    zsh_for_beginners:
+        build: ./
+        privileged: true
+        volumes:
+            - ./share/server.py:/home/zsh/server.py:ro
+            - ./share/xinetd:/etc/xinetd.d/zsh:ro
+            - ./share/run.sh:/run.sh:ro
+            - ./share/flag:/flag:ro
+            - ./chroot:/home/zsh/chroot:ro
+            - ./tmp:/tmp:rw
+        tmpfs: 
+            - /home/zsh/chroot/tmp
+            - /home/zsh/chroot/tmp/_your_tar_file_is_extracted_here_plz_enjoy
+        ports:
+            - "10206:4869"
+        expose:
+            - "4869"
+        cap_add:
+            - SYS_CHROOT
+
